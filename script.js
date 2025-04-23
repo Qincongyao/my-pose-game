@@ -1,7 +1,6 @@
 window.onload = () => {
-  // ✅ 加载兼容版本的 TensorFlow.js（v3.21.0）和 PoseNet 模型
   const script1 = document.createElement("script");
-  script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0";
+  script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0"; // ✅ 正确写法
   document.head.appendChild(script1);
 
   const script2 = document.createElement("script");
@@ -12,35 +11,31 @@ window.onload = () => {
     startPoseNet();
   };
 
-  // ✅ 全局小球变量
   let ballY = 200;
   let velocity = 0;
   const gravity = 0.3;
   const lift = -6;
 
-  // ✅ 主逻辑函数
   async function startPoseNet() {
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
 
-    // 打开摄像头
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     video.srcObject = stream;
     video.play();
 
     const net = await posenet.load();
-    console.log("PoseNet 模型加载完成");
+    console.log("✅ PoseNet 模型加载完成");
 
     video.onloadedmetadata = () => {
       detectPose();
     };
 
-    // ✅ 姿态检测 + 小球控制
     async function detectPose() {
       const pose = await net.estimateSinglePose(video, { flipHorizontal: false });
-
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       drawKeypoints(pose.keypoints, 0.5, ctx);
 
       const nose = pose.keypoints.find(p => p.part === "nose");
