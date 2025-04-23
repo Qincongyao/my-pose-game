@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pose Controlled Game</title>
+  <title>Pose-Controlled Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
-  <!-- ✅ 直接写死依赖版本 -->
+  <!-- ✅ 静态引入 TF.js 和 PoseNet -->
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
 </head>
 <body>
+  <h1>🕹️ Pose-Controlled Jump Game</h1>
+  <p>Raise both hands to make the ball fly!</p>
   <video id="video" width="640" height="480" autoplay muted></video>
   <canvas id="canvas" width="640" height="480"></canvas>
   <script src="script.js"></script>

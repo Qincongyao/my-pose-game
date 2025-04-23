@@ -1,9 +1,4 @@
 window.onload = () => {
-
-  script2.onload = () => {
-    startPoseNet();
-  };
-
   let ballY = 200;
   let velocity = 0;
   const gravity = 0.3;
@@ -77,4 +72,6 @@ window.onload = () => {
       ctx.fill();
     }
   }
+
+  startPoseNet();
 };
