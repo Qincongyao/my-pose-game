@@ -1,7 +1,7 @@
 window.onload = () => {
   // 加载 TensorFlow.js 和 PoseNet
   const script1 = document.createElement("script");
-  script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs";
+  script1.src = "script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0";
   document.head.appendChild(script1);
 
   const script2 = document.createElement("script");
