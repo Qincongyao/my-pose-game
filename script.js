@@ -1,7 +1,7 @@
 window.onload = () => {
-  // 加载 TensorFlow.js 和 PoseNet
+  // ✅ 加载兼容版本的 TensorFlow.js（v3.21.0）和 PoseNet 模型
   const script1 = document.createElement("script");
-  script1.src = "script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0";
+  script1.src = "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0";
   document.head.appendChild(script1);
 
   const script2 = document.createElement("script");
@@ -12,11 +12,13 @@ window.onload = () => {
     startPoseNet();
   };
 
+  // ✅ 全局小球变量
   let ballY = 200;
   let velocity = 0;
   const gravity = 0.3;
   const lift = -6;
 
+  // ✅ 主逻辑函数
   async function startPoseNet() {
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
@@ -34,12 +36,11 @@ window.onload = () => {
       detectPose();
     };
 
+    // ✅ 姿态检测 + 小球控制
     async function detectPose() {
       const pose = await net.estimateSinglePose(video, { flipHorizontal: false });
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // 画关键点
       drawKeypoints(pose.keypoints, 0.5, ctx);
 
       const nose = pose.keypoints.find(p => p.part === "nose");
@@ -52,12 +53,10 @@ window.onload = () => {
                     rightWrist.position.y < nose.position.y;
       }
 
-      // 小球控制逻辑
       if (isHandsUp) velocity += lift;
       velocity += gravity;
       ballY += velocity;
 
-      // 边界限制
       if (ballY > canvas.height - 20) {
         ballY = canvas.height - 20;
         velocity = 0;
